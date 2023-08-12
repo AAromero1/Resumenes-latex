@@ -1,0 +1,314 @@
+\section{Conceptos}
+1. Ancho de banda limitado = es cuando una señal tiene una frecuencia minima y una maxima ambas no infinitas. Esta puede ser representada entre la multiplicacion entre una transformada de furier y un rect correctamente escalado y desplazado \\
+2. ancho de tiempo limitado= es cuando una señal tiene una duracion de tiempo no finita, puede ser modelado mediante la multiplicacion de la señal con un rect correctamente escalado y desplazado \\
+Por ende una señal no puede tener un ancho de tiempo y de banda limitado a la vez.\\
+\newpage
+\section{Laplace}
+ La transformada de laplace es de cierta manera muy parecida a Furier, ya que ambos cambian el dominio en el cual se trabaja y entre ellos existe una conexion, ya que Furier trabaja en el dominio de las frecuencias (w) y laplace tambien trabaja dentro del dominio de las frecuencias a exepcion de un termino extra, los reales.\\
+Por ende la gran diferencia es que en Furier ocupamos $e^{-iw}$ siendo $w=2\pi u$ en cambio en Laplace la transformada es un tanto distinta $e^{-st}$ siendo $s= \sigma +iw$ 
+este pequeño cambio permite que cualquier funcion localmente integrable pueda pasar a la transformada de laplace ,a diferencia de fourier que las funciones debian estar en el dominio $L_1$\\
+Algunas caracteristicas de la transformada de Laplace es que esta puede ser unilateral o bilateral. Esto significa que en la integracion no necesariamente tiene que ser de +infinito a menos infinito, tambien permite de 0 a infinito o de - infinito a 0. Dentro de las señales esto es muy relevante ya que en su gran mayoria son unilaterales. \\
+Cabe recalcar que cualquier funcion puede ser unilateral si esta multiplicada por un escalon.
+\insertequation{L[f](s)=F(s) = \int_{-\infty}^{\infty}f(t) e^{-st}}\\
+Anteriormente se menciono que toda funcion localmente integrable puede ser transformada mediante laplace, relamente esto no es tan asi, necesita cumplir un cierto requisito llamado ROC, esto se denomina la region de convergencia. Si dos señales distintas difiren respecto a la region de sus ROCs esta transformada no existe.
+Si bien la transformada de Furier tiene sentido fisico, laplace no tiene una real interpretacion fisica.\\
+Continuando con la region de convergencia, esta queda definida dependiendo de si es unilateral o bilateral. \\
+de la siguiente manera. Una señal unilateral izquiera, es decir va de -infinito a 0, su ROC queda definida mediante su mayor polo, hacia la izquierda, en una señal unilateral derecha esta esta definida mediante su menor polo hacia la derecha y una señal bilateral esta definida mediante sus polos interiore, ademas de que su zona de convergencia queda encerrada entre los polos.
+\insertimage{img/roc}{scale=1}{Diferentes tipos de ROC}
+Siendo las areas grises los valores de s para los cuales la transformada de laplace converge\\ 
+Algunos ejemplos.
+\insertimage{img/roc1}{scale=0.8}{Diferentes tipos de ROC}
+\newpage
+\subsection{Propiedades de la transformada de laplace}
+Como la transformada de laplace es una aplicacion lineal, podemos deducir varias propiedaes tal que
+Homogeneidad
+\insertequation{af(t)\to aF(s)}\\
+Superposicion
+\insertequation{f(t)+g(t)\to F(s)+G(s)}\\
+Desplazamiento, siempre y cuando ROC $ \alpha < \sigma < \beta$
+\insertequation{L[f(t-a)u(t-a)](s)=e^{-as}L[f](s)......y...... L[e^{-bt}f(t)](s) = L[f](s+b)}\\
+Ejemplo.
+\insertequation{L[t^n](s)=\frac{n!}{s^{n+1}}------------------->, L[t^ne^{at}](s)=\frac{n!}{(s-a)^{n+1}}}\\
+Escalamiento, siempre y cuando ROC  $\alpha , \frac{\sigma}{a}$
+\insertequation{L[f_a(t)](s)=\frac{1}{\abs{a}}L[f(t)](\frac{s}{a})}\\
+Derivada existen dos tipos, bajo el dominio de laplace
+\insertimage{img/dlaplace}{scale=1}{Derivada en el dominio de Laplace}
+y la derivada en el dominio del tiempo
+\insertequation{L[f'(t)](s). = . sL[f](s)-f(0^+)}\\
+Ejemplo importante de ambas.
+\insertimage{img/derivadal}{scale=1}{Tipos de derivadas en Laplace}
+Integracion f desaparece en t=0.
+\insertequation{L[\int_0^t f(\tau)d\tau](s)=\frac{L[f](s)}{s}}\\
+Convolucion, suponiendo dos funciones causales f y g
+\insertequation{L[f*g](s)=L[f](s)L[g](s) \to F(s) G(s)}\\
+Teorema del valor final
+\insertequation{Lim_{\abs {s} \to 0^+} sL[f](s) = f(+\infty)}\\
+y el teorema del valor inicial es lo mismo solo que S tiende al infinito y f a 0\\
+La transformada de laplace de un impulso.
+\insertequation{L[\delta](s)=1}\\
+Propiedad interesante (al menos para mi)
+\insertequation{L[D^1\delta](s)=s}\\
+\insertequation{L[D^n\delta](s)=sL[D^{n-1}\delta] =s^n}\\
+Multiplicacion (relevante recordar siempre, consejo de mi)
+\insertequation{(fg)(t)= F(s)*G(s)}
+\newpage
+\subsection {Transformada inversa de Laplace}
+Si bien sabemos que se puede pasar al dominio de laplace , tambien se puede devolver al dominio de la frecuencia. Esta se puede resolver de multiples formas, pero su definicion exacta seria la siguiente.
+\insertequation{f(t)=\frac{1}{2\pi i}\int L[f](s) e^{st} ds ---> \frac{1}{2\pi i}Lim_{w\to \infty} \int_{\omega -iw}^{\omega + iw} L[f](s) e^{st}}\\
+Esta es la manera de invertir Laplace matematicamente correcto.\\
+Tambien se tiene que siempre la transformada de una funcion podra ser escrita mediante funciones racionales, esto permite la utilizacion de dos metodos, Fracciones parciales y el teorema de residuos de cauchy ( personalmente prefiero cauchy ya que sirve en cualquier funcion a diferencia de las fracciones parciales).\\
+Resumen rapido de fracciones parciales\\
+Para utilizar este metodo hay que dividir el polinomio en sus distintos componentes para asi encontrar una solucion de cada termino, las fracciones a utilizar quedan definidas por el numero de polos del polinomio.\\ 
+\subsection {Teorema de residuos de cauchy}
+Este teorema prove la forma mas general y sencilla de resolver la transformada inversa de Laplace, para esta resolucion se tienen que identificar los polos de la fracion para luego utilizarlos con la formula siguiente
+\insertindexequation{Lim_{s\to s_n} f(s)(s-s_n) e^{st}}{Polo de orden 1}
+\insertindexequation{Lim_{s\to s_n}\frac{d}{ds}( f(s)(s-s_n))^2 e^{st}}{Polo de orden 2}
+\subsection { respuesta de frecuencias y filtros}
+Como primera parte tenemos algo bastante relevante, las exponenciales complejas son autofunciones de cualquier sistema LTI, esto se puede demostrar a continuacion.
+\insertequation{g(t) = (h*f)(t)= \int_{-\infty}^\infty f(t-\tau) h(\tau) d\tau}\\
+Esto es un sistema de toda la vida , cierto? bueno remplazemos f(t) con $e^{st}$\\
+\insertequation{g(t)= \int_{-\infty}^\infty e^{s(t-\tau)}h(\tau) d\tau= e^{st} \topequal{\int_{-\infty}^\infty h(\tau)e^{-s\tau}d\tau}{Laplace} = e^{st} H(s)}
+\\ Este mismo proceso sirve para furier!! solo hay que remplazar s por iw y listooo!!\\ \underline{las exponenciales son autofunciones de cualquier \textbf{sistema LTI}}\\
+\subsectionanum{ Funcion de transferencia}
+Muy parecido a la respuesta de frecuencia de un sistema la funcion de transferencia satisface la misma ecuacion
+\insertequation{G(s)=F(s)H(s)}\\
+Donde H(s) es la funcion de transferencia , y por arte de magia si s=iw la funcion de transferencia se convierte en la respuesta de frecuecia de un sistemaaa!\\
+Esta puede ser representada en terminos de su magnitud y fase, tal que
+\insertequation{H(s)=\abs{H(s)}e^{i<H(s)}}\\
+Esto permite obtener el siguiente analisis\\
+1.La funcion F(s1) tiene una magnitud directamente proporcional a la multiplicacion de los vectores 0 y al mismo tiempo inversamente proporcional a la multiplicacion de los vectores polos\\
+2. La funcion F(s1) tiene una fase igual a la sima de los angulos de los vectores 0 menos la suma de los angulos de los vectores polos.\\\\\\
+\subsectionanum{Filtros selectivos de frecuencia}
+He aqui la parte a mi parecer mas "entretenida" de los polos y ceros. ya que al mover estos de forma cautelosa y estudiada, se pueden generar curvas de respuesta de frecuancia especificas. Esto significa que ciertas frecuencias se atenuaran y otras aumentaran. es decir la funcion de transferencia es un filtro selectivo en frecuencia , cuando se restringe al eje imaginario.\\
+Para empezar partiremos con el filtro mas sencillo. Un filtro pasabajos de primer orden, es decir un solo polo o monopolo.\\
+Este se caracteriza por su sencilla forma
+\insertequation{F(s)=\frac{1}{s+a}}\\ Este filtro lo que genera es que genera un polo en -a ( cabe recalcar que si el filtro estuviera en +a este seria completamente inestable, ya veremos por que), cual mientras mas cerca este del 0 mas amplificara la frecuencia que este en s. Esto se debe a que como antes se menciono la magnitud es inversamente proporcional a la multiplicacion de los vectores polos, por ende mientras mas pequeño sea el vector del polo mas grande sera la amplificacion de este.\\
+\insertimage{img/pab}{scale=1}{Filtro pasa bajos}
+Con esta misma logica pero al revez se puede generar un pasa altos de la siguiente manera
+\insertequation{F(s)=s+a}\\ de forma contraria al pasa bajos, este filtro a medida que a se acerca a 0 , las frecuencias se atenuan, ya que cumple con la regla 1 de los filtros de frecuencia, mas cerca al ser un 0 es proporcional.\\
+\insertimage{img/pal}{scale=1}{Filtro pasa altos}
+Si creamos un filtro pasa altos de segundo orden , generamos realmente un filtro rechaza banda.
+\insertequation{F(s)=(s+c)(s+c*)}\\
+Siempre que c pertenezca a los complejos, lo que se genera es una atenuacion de la frecuencia mas cercana a la posicion de los ceros.\\
+\insertimage{img/rch}{scale=1}{Filtro pasa altos de segundo orden (rechaza banda)}
+Por ultimo de forma contraria se tiene el filtro pasa banda de segundo orden, este es un filtro que solo tiene polos
+\insertequation{F(s)=\frac{1}{(s+c)(s+c*)}}\\ Al igual que el anterior c es complejo, este filtro genera una amplificacion en las frecuencias que indica c, Mientras c este mas cerca del origen del eje imaginario, mas se amplifican las frecuencias.
+\insertimage{img/pba}{scale=1}{Filtro pasa bandas}
+Como dato extra un filtro pasa bajos ideal es aquel que multiplica la transformada de furier por un rect, de esta manera solo entra el rango de frecuencias que queremos y si pasamos al dominio del tiempo se obtiene que el filtro perfecto es un sinc, tal que se cumple la siguiente relacion
+\insertequation{rect(\frac{u}{2u_c})\topequal{\to}{F} 2u_c sinc(2u_ct)}
+
+\newpage
+\section{Señales discretas}
+\subsection{Muestreo}
+Lo ma's importante de esta parte es entender muy bien que es la distribucion Shah, ya que es la base de el muestreo. Esta es la funcion mas importante para pasar de lo continuo a lo discreto, ya que lo que hace la funcion Shah es multiplicar la funcion por impulsos puestos arbitrariamente, de la siguiente forma.
+\insertimage{img/sha}{scale=1}{Funcion Shah de periodo T}
+Donde T es el periodo en el cual queremos hacer el muestreo. Cabe mencionar que si ocupamos la propiedad del escalamiento a una distribucion tenemos que el Shah pasa a estar multiplicado por su frecuencia y queda muestreo en la frecuencia\\
+Otro dato interesante es que la transformada de un Sha es otro Shah escalado en su periodo, y viceversa\\\\
+\subsubsection{periodizacion mediante Shah}
+Como vimos esta sirve para hacer una señal discreta, tambien  sirve para generar una señal periodica convolucionando con Shah. Para la cual existe una frecuencia exacta, pero que veremos mas delante.\\
+Retomando lo anterior, podemos volver una señal continua en una discreta , tal que al multiplicar con un shah de periodo T sucede que
+\insertequation{t=nT =\frac{n}{u_s}}\\
+$u_s$ es la frecuencia de muestreo, en resumen el periodo a la menos 1. De forma visual sucede esto.
+\insertimage{img/ds}{scale=0.8}{Muestreo}
+Si pasamos la ecuacion al dominio de furier, sucede que volvemos la funcion una señal periodica, ya que estariamos convolucionando con un shah  y eso vuelve la señal periodica\\
+Entonces esquivalente decir que muestrear una señal en el tiempo es lo mismo que periodizar su transformada de laplace  \\\\\\\\
+\subsection{Interpolacion}
+La interpolacion trata de reconstruir una señal discreta en una continua, para eso hay que realizar el proceso inverso 
+\insertequation{f(t)= \sum_{n= -\infty}^{\infty} f_d=(nT)g_r(t-nT)}
+$g_r$ sera nuestra funcion auxiliar la cual puede tener 3 distintos tipos, esta funcion se llama nucleo o kernel de interpolacion\\
+La primera en presentar es la interpolacion de orden 0, en esta ocuparemos un Rect como g(r) tal que 
+\insertequation{g_r(t)=\square (\frac{t}{T}) }\\
+esa interpolacion es centrada en cada muestra , pero tambien existe otra forma
+\insertequation{g_r(t)=\square (\frac{t-\frac{T}{2}}{T})}\\
+Si las pasamos al dominio de Fourier estas serian TSinc(Tu) y $Tsinc(Tu)e^{-iT\pi u}$ su reconstruccion no es muy exacta ya que se hace una linea recta hasta el siguiente punto de la funcion discreta.
+\insertimage{img/or0}{scale=1}{Interpolacion de orden 0}
+Ahora haremos la interpolacion de orden 1 la cual es simplemente la funcion triangulo (t/T) y su furier es $$Tsinc^2(Tu)$$ y a diferencia de la orden 0 como esta al cuadrado genera leves curvas las cuales se ven asi
+\insertimage{img/or1}{scale=1}{Interpolacion de orden 1}
+Y ahora la interpolacion mas importante pero que es solo teorica ya que es imposible generar la interpolacion perfecta. Esta es la interpolacion sinc , la cual pensaras, pero hey todas las anteriores tienen el sinc, si pero en el dominio de la frecuencia, esta en cambio es un rect en el dominio de la frecuencia entonces corta exactamente la frecuencia entera y todas su subidas y bajadas ya que si el rect es suficientemente grande absorve todas las frecuencias.
+Entonces la funcion seria
+\insertequation{g_r(t)= sinc(\frac{t}{T}) ---> G_r(u)= T *rect(Tu)}
+\insertimage{img/or2}{scale=1}{Interpolacion ideal}
+\subsubsection{Teorema del muestreo de Nyquist}
+Como ya vimos cual es la interpolacion ideal, ahora analizaremos como tiene que ser el periodo para poder reconstruir la funcion o muestrearla sin perder informacion\\
+Si una funcion cuya transformada de furier tiene ancho de banda limitado, existe un $$u_m$$ llamado frecuencia de nyquist, es decir la frecuencia maxima de la señal\\
+Con esta frecuencia nace el teorema de que $$u_m<\frac{1}{2T}$$ la señal se puede reconstruir de forma exacta.
+\insertimage{img/ny}{scale=1}{Teorema de nyquist}
+Entonces si la frecuancia de muestreo es mayor que dos veces la frecuencia de nyquist obtenemos sobre muestreo, en el cual no perdemos informacion, pero tenemos estamos con un sistema que no es optimo, el optimo es cuando la frecuencia de muestreo es igual a dos veces la frecuencia maxima y por ultimo si esta es menor empezamos a perder informacion ya que sucede el aliasing y las señales se sobreponen. 
+\\
+ Dato curioso del sinc.
+\insertimage{img/sy}{scale=1}{Sinc en convolucion}
+\subsection{Señales y sistemas discretos}
+Como vimos antes aprendimos a volver una funcion discreta , podemos hacer lo mismo con cualquier señal. Asi que suceden las mismas propiedades, pero en las señales existen tipos  tales como \\
+Señales discretas periodicas $$f[n]= f[n+N]$$ siendo N el periodo de la funcion
+\\ Señales aperiodicas no existen repeticiones de algun tipo y un ejemplo seria el ruido blanco. \\ Lo demas de simetria y todo sigue las reglas de una señal normal
+\\\\ En los sistemas discretos tambien funciona lo mismo y en estos podemos generar interconeccion entre los discretos al continuo, asi como los sistema de ecualizador de audio en el computador, donde una señal continua se discretiza, y se ecualiza digitalmente para luego convertila en una señal continua, ya que en fourier se puede equalizar rapidamente\\
+Estos sistemas tienen las siguientes propiedades, causalidad ,linealidad , invarianza, estabilidad ,memoria e invertibilidad
+\subsubsection{Señales discretas utiles}
+Sinusoides discretas \insertequation{x[n]= A \cos{wn + \phi}\to x[n]= A \cos{w(n+N) + \phi}= x[n]= A \cos{wn +2\pi k+ \phi } - - - - w=w\pi\frac{k}{N}}\\
+Exponencial compleja \insertequation{x[n]=e^{(\sigma +iw)nT}}  Este tiene una representacion como magnitud y fase, tal que \insertequation{x[n]=z^n = \abs{e^{\sigma}T} * e^{iwTn}}\\
+El delta dirac funciona exactamente igual hasta matematicamente esta correcto  cuando n=0 vale 1 y listo \\ 
+Ahora entramos con el escalon discreto ahora las cosas si cambian. si bien funciona de la misma manera , puede ser repesentado como una sumatoria de impulsos hasta n y de forma contraria el impulso se puede representar como  u[n]-u[n-1]\\
+el rect discerto funciona igual tambien, con la condicion que ahora esta definido mediante el escalon, tal que un Rect de tamaño N es igual  u[n]-u[n-N]
+\subsection {Transformaciones de señales discretas}
+Una propiedad muy util es que en las senales discretas podemos ocupar la superposicioon, tal que \insertequation{f[n] = A f_1[n] +Bf_2[n]}\\
+Desplazamiento o desfase, algo muy pero muy utilizado en senales \insertequation{f[n] =s[n-k]}\\\\  Funciona exactamente igual que una funcion comun
+\\  Reversion o espejamiento[f]=s[k-n] , sucede que cuando k= 0 la señal se espeja en torno a n=$\frac{k}{2}$\\
+Escalamiento aqui no existe realmente un escalamiento, ya que no aumentamos la intesidad de la senal, en ves de eso aumentamos la frecuencia de muestreo y si el escalamiento es menor a 1 de forma contraria disminuimos la frecuencia de muestreo
+\\ \\ \\
+\subsection{Tipos de convolucion (si tipos..)}
+Existe la convolucion discreta lineal la cual funciona exactamente igual solo que con sumatorias
+\insertequation{(f*h)[n]=\sum_{k= -\infty}^\infty f[k]*h[n-k]}\\ Convolucion de toda la vida entera. \\
+Funciona  igual, ahora la funcion resultante va a ser la suma de ambos largos de funciones -1, todo bien todo correcto\\
+Pero ahora tambien existen las convoluciones circulares la cual es muy bizarra, si definimos dos funciones discretas y finitias
+\insertimage{img/cir}{scale=0.8}{Convolucion circular} 
+Como se puede ver esta convolucion dependera del periodo P que nosotros eligamos, de verdad es re bizarra, pero sucede que cuando el periodo es igual al periodo de la convolucion lineal estas son iguales.
+\\\\
+\subsection{Sistemas LTI discretos}
+Como toda senal que se respeta existen los sistemas linealmente invariables discretoos, los cuales sencillamente fuencionan exactamente igual al sistema comun solo que ahora tratamos en sumatoriaas\\
+Exactamente de la misma forma que en senales se ocupa la respuesta al impulso aqui funciona igual g[n] =h[h]**f[n]  tal que
+\insertequation{\sum_{k=-\infty}^\infty f[k]* h[n-k]} \\ Precioso , no? al verdad es que si me gusta la convolucion discreta lineal \\
+Algo muy entretenido es que como anteriormente visto podemos hacer ecuaciones de diferencias o EDO, tal que la respuesta al impulso h[n] se pueden determinar sus coeficientes mediante una EDO lineal que describe el sistema
+\insertequation{\sum_{k=0}^N a_k g[n-k] =\sum_{k=-0}^M b_k f[n-k] }\\ Esta es una edo de orden N \\
+Ahora si consideramos f[n] como el impulso podemos reescribir como
+\insertequation{h[n]= \frac{1}{a_0}\sum_{k=0}^M b_k \delta[n-k]-\sum_{k=0}^N a_k h[n-k]} \\
+Tambien existe la respuesta al impulso finita o FIR\\
+Es decir tenemos un sistema no recursivo con $a_k$ =0 para n>0 y $a_0$ = 1, entonces la respuesta al impulso esta dada solo por el impulso de la ecuacion anterior. \\
+Como a su ves existe un sistema con respuesta al impulso infinita IIR el cual si tiene recursividad.
+ \\ \\ \\ \\ 
+\subsection{Variables de estado (re importante comprenderlas)}
+Sabemos de anterioridad que para optener la respuesta de un sistema es la suma entre la respuesta a estado cero y la respuesta a entrada cero. \\
+Ejemplo si tenemos la siguiente  EDO
+\insertequation{g[n]= -a_1g[n-1]-a_2g[n-2]+b_0f[n]} \\ podemos definir las variables de estado v1[n]= g[n-2] y v2[n]=g[n-1] gracias a esto podemos pasar a la siguientre matriz
+\insertimage{img/edo}{scale=0.8}{Formulacion matricial variables de estado}
+Resumiendo lo anterior finalmente obtenemos una forma compacta de 
+\insertequation{v[n+1]=Av[n] +bf[n]  - -> g[n]=cv[n] + df[n]}\\ en el cual v[n] almacena la historia del sistema y se llama vector de estado, y g[n] se denomina ecuacion de salida.\\
+Finalmente podemos encontrar la matriz de transicion de estados denominada como $$\phi[n] =A^n$$ la cual es invertible y finalmente todo puede ser representado como 
+\insertimage{img/solr}{scale=0.8}{Respuesta total sistema discreto}
+
+\newpage 
+\section{Transformada de fourier en Z}
+Volviendo a la transformada de fourier, oh yes. \\
+Partiremos cooonn
+\subsection{Tiempo discreto DTFT}
+Esta se definee comoo  \insertequation{DTFT[f](u)="F"(u)=\sum f(nT) e^{-i2\pi unT}} \\ Esta se ocupa cuando tenemos una señal discreta que fue muestreada a partir de una señal continua con un periodo de muestreo T
+\\ Si se supone que F(u) es de ancho de banda limitado tennemos que F(u)=0, $$\abs{u}>\frac{1}{2T}$$ lo que significa que no hay traslape entre las replicas del espectro entonces se puede reconstruir la senal con la siguiente formula 
+\insertequation{IDTFT["F"][n]=f[n]=T\int_0^{\frac{1}{T}}"F"(u) *e^{i2\pi unT}du}
+Lo bonito de esto es que en DTFT el impuslo de dirac es el que todos conocemos 1 \\ Ahora pasaremos a funciones relevantes, tales como un rect discreto(feo re feo)
+\insertimage{img/rec}{scale=0.8}{DTFT rect discreto}
+La exponecial compleja es mas fea aun miren.
+\insertimage{img/exd}{scale=0.8}{DTFT Exponecial compleja}
+ algo entrete es que por la definicion de DTFT se puede concluir que una senal discreta se puede representar como una superposicion de exponenciales armonicas, tal que
+\insertequation{F(u)* e^{i2\pi unT}.... para... -\frac{1}{2T}< u < \frac{1}{2T}} \\ que a su ves pude ser representado como parte real e imaginaria o en terminos de magnitud y fase
+\\
+\\
+\\
+\subsection{ Frecuencia discreta DFFT}
+Esta se ocupa en el caso de una senal peridica continua construida mediante la periodizacion de una funcion no periodica \insertequation{F[k]=F(kU)=F(\frac{k}{T_0}}
+\\ Siendo U el periodo de muestreo para poder construir F[k]
+\\ Se obtiene que la funcion periodizada en el tiempo es 
+\insertequation{f(t) = F^{-1}[F_s](t)= \sum F\frac{k}{T_0}e^{i2\pi t \frac{k}{T_0}}}
+\\ Porque definimos primero la inversa , ya que esta es necesaria para definir la directa ya que primero tenemos que periodizar la señal para luego poder trabajar en ella
+\\ ahora definiremos la directa. Anteriormente se construyo la DTFT, entonces si esta suponemos que esta en un tiempo limitado, ya que es perodica su informacion se repite , se puede acotar en t>$\frac{T_0}{2}$ en este caso no existe traslape entre las replicas, ademas de que cuando la senal es muestreda las replicadas quedan escaladas por $T_0$. entonces podemos definir la DFFT como \\ \\
+\insertequation{DFFT[f](k)= F[k] = \frac{1}{T_0}\int^{T_0} f(t) e^{-i2\pi t\frac{k}{T_0}}dt}  
+\insertequation{ = U\int^{\frac{1}{U}}f(t) e^{-i2\pi tkU}dt}
+\\ *Iluminacion magistral \\ Si no entendiste como yo , entonces  dejame mostrarte una imagen para luego explicar. 
+\insertimage{img/exs}{scale=0.8}{iluminacion DFFT O CTFS}
+WOOOW si  WOOOW esto explica todo we, relamente si no entendiste esto deja el ramo. (apaño)
+\\\\\\ 
+\subsection{Transformada de Fourier discreta DFT}
+Partiremos con su ecuacion para luego explicarla. \insertequation{F[k]= \frac{1}{N}\sum_{n=0}^{N-1}f[n]e^{-ik\frac{2\pi}{N}n}} \\ Donde N es la longitud de la DFT \\
+Tenemos que como la señal es periodica tambien es el espectro dado de F[k]=F[k+vN]. Tambien tenemos la transformada inversa de fourier como 
+\insertequation{f[n]=\sum_{n=0}^{N-1} F[k]e^{ik\frac{2\pi}{N}n}}
+\\ \textbf{ Esta senal solo tiene sentido para senales discretas y periodicas.}
+\\ Relacion con la DTFT. Ya que la transformada de foutiet de tiempo discreto funciona en una senal causal de longitud finita N , entonces f[n]=0 y sucesion discreta. tenemos que su furier es continua, entonces si esta misma señal la pasamos por DFT sucede que si bien determina la misma transformada esta es discreta. Entonces si la trasnformada DTFT la muestreamos en razon a  $u=\frac{k}{NT}$ obtenemos que ambas transformadas son exactamente iguales. ya que ambas serian periodicas de largo finito.\\
+\\ Relacion con la DFFT. Bueno sabemos que esta es la trasnformada de una frecuencia discreta . de una senal periodica continua y es discreta en la frecuencia al igual que la DFT. entonces  si sabemos que la inversa de un DFFT es continua en el tiempo y la inversa de la IDFT es la misma senal pero discreta. Podemos establecer una relacion en el tiempo, ya que si la senal continua de la DFFT la muestreamos en razon a $t=\frac{nT}{N}$ obtenemos la misma funcion.
+\\ Lindo si todo lindo ( de entender super ejecutar es otro mundo) . Ahotra veremos que informacion nos entrega la DFT, curiosamente esta entrega toda la informacion que hay sobre la señal, dado que si calculamos con la DTFT una senal discreta que sabemos que es periodica de periodo 1/T. esto aplica tambien para una senal discreta de longitud finita osea N obtenemos lo siguienteee
+\insertimage{img/dft}{scale=0.8}{Informacion en la DFT}
+Lo que veemos que la dft tiene toda la informacion sobre la senal
+\\ Ahora mostrare una foto importante que hay que aprendersela como sea, tatuarla si es necesario.
+\insertimage{img/fourierf}{scale=1}{FT,DTFT,DFFT y DFT}
+Interpretacion del espectro de furier\\
+Como bien se sabe furier es el mundo de las frecuencias, por ende hay que comprender como interpretar las frecuencias de una señal finita de largo N, si el largo es par, espectro es el siguiente.
+\insertimage{img/fre}{scale=0.75}{Espectro DFT}
+Representacion matricial\\ de una forma distinta se puede representar la DFT Como una matriz de N x N 
+\insertequation{F= \frac{1}{N}*Wf}
+siendo W igual a
+\insertimage{img/mat}{scale=0.9}{Matriz DFT}
+Esta matriz tiene diveros usos ya que se suele ocupar la FFT (la veremos mas adelante), y la matriz representa la direccion vectorial en el circulo unitario.
+\\ Si hacemos el DFT del impulso , nos entrega el impulso dividido en la cantidad de muestras. Por ende todas las frecuencias estan presentes con el mismo peso\\\\
+\subsubsection{Propiedades y resolucion de frecuencia}
+Dentro de este capitulo hago incapie en recordar la igualdad $NUT=1$
+\\ Apodizacion \\ Este es una forma de superposicion, se acortan las señales muy largas en "ventanas", para asi analizar ventana por ventana y tener un analisis mas practico y menos tedioso. Esta ventana tiene que cumplir con el NUT. En sencillas cuentas al multiplicar por nuestra ventana en Furier se esta convolucionando por esta misma ventana 
+\\ \\Derrame \\ Esto sucede cuando el largo de la ventana no coincide con el periodo, provocando que la informacion de la dft se derrame hacia los terminos cercanos
+\insertimage{img/derrame}{scale=0.8}{Derrame (leaking)}
+\subsection{Transformada rapida de Fourier FFT}
+Como mencione antes, existe algo llamado la transformada rapida de fourier, la cual consiste en un algoritmo de resolucion, si bien hay muchos el mas conocido es el Cooley-Tukey o radix-2//
+Si consideramos la DFT como 
+\insertequation{F[k]=\frac{1}{N}\sum_{n=0}^{N-1}f[n] W_N^{kn}} \\ Donde $W_n^k=e^{-i\frac{2\pi}{N}*k}$. \\
+La idea vasica de este algoritmo es descompor la DFT por sus indices pares e impares, de forma que nos quedan dos sumatorias, par e impar
+\insertequation{F[k]=\frac{1}{N}(F_e[k]+W_N^k*F_o[k])}
+Donde Fe es par y Fo sus indices impares. \\ Este algoritmo solo sirve para $$N=2^w$$ con w e R, ya que la idea es dividir las sumatorias en parte par e impar hasta llegar a w sumatorias de largo 2. \\ Ejemplo en el caso de N=2 tenemos
+\insertequationcaptioned{F[0]= \frac{1}{2}(f[0]+W_2^0f[1])= \frac{1}{2}(f[0]+f[1]) //////////... W_2^0 =e^{-i\frac{2\pi}{2}*0}}{Especificamente como los componentes se suman se llama calculo de la frecuencia baja}
+\insertequationcaptioned{F[1]=\frac{1}{2}(f[0]+W_2^1f[1])=\frac{1}{2}(f[0]-f[1])}{Calculo de las frecuencias altas}
+\insertimage{img/fft}{scale=0.86}{Fft N=16}
+\insertimage{img/fft1}{scale=0.86}{fft N=8 a detalle}
+
+
+
+
+
+
+\newpage
+\section{Transformada Z}
+La gran transformada Z que a gran resumen es laplace pero discreto, Se define F(z)= z[f[n]], siendo $$z=e^{\omega + iw}$$ (Suena a laplace, no?, pues si claramente). Como podemos imaginar la existencia de la transformada Z depende tanto de la frecuencia compleja como de la señal a transformar. Como es laplace en discretos tiene las lindas regiones de convergencia llamadas ROC (SI EXACTAMENTE COMO LAPLACE)
+\insertequationcaptioned{F(z) = \sum_{-\infty} ^\infty f[n] z^{-n}}{Transformada Z bilateral}
+bueno esta es la formula general la cual puede ser unilateral?, si claramente ocupando los mismos metodos de laplace.\\ Ejemplos
+\insertequation{Z(rect_N[k])=\sum_{k=0}^{N-1} z^{-k}\Rightarrow z\neq1 = \frac{1-z^{-N}}{1-z^{-1}}, z = 1\Rightarrow N}
+\\ Y como toda transformada(la verdad en la mayoria) si metemos el impulso sale 1
+\subsection{Las ROC y convergencia}
+Si bien la transformada Z se define con una serie infinita, una condicion para la convergencia es que sus elementos sean absolutamense sumables y menores a $\infty$ \\ Las ROC estan determinadas unicamente por la magnitud de la frecuencia compleja, y su fase no tiene ningun efecto alguno sobre la convergencia.
+\insertimage{img/roc2}{scale=0.7}{Las ROC en Z}
+Aqui tambien existen los polos y ceros por ende existe su diagramaaaa. El cual es bastante distinto al de laplace, ya que si bien este tambien tiene el circulo unitario, funcionan de la misma forma y los filtros tambien, solo que aqui es un poco mas diverso.
+\insertimage{img/dg}{scale=0.8}{diagrama de polos y ceros en Z}
+\subsection{Propiedades}
+Si bien la gran mayoria de propiedades son muy parecidas a las de laplace remarcaremos las mas importantes
+\insertequationcaptioned{f[n-1]\to z^{-1}F(z)+f[-1] \Rightarrow f[n+1] \to zF(z) -zf[0]}{Desplazamiento unitario de la transformada unilateral}
+\insertequationcaptioned{f[n-k] \to z^{-k}F(z) + z^{-k}\sum_{m=1}^k f[-m]z^m \Rightarrow f[n+k] \to z^k F(z)- z^k \sum_{m=0}^{k-1}f[m]z^{-m}}{Desplazamiento general de la Transformada Z unilateral}
+\insertequationcaptioned{a^nf[n]\to F(\frac{z}{a})}{Escalamiento}
+\insertequationcaptioned{f[-n] \to F(\frac{1}{z})}{Reversion}
+\insertequationcaptioned{f_k[n]= n=kr \to f[r], or, n\neq kr \to F(z^k)}{Estiramiento}
+\insertequationcaptioned{nf[n]\to -z\frac{dF(z)}{dz}}{Derivada}
+\insertequationcaptioned{\sum_{k=-\infty}^n f[k]\to \frac{1}{1-z^{-1}}F(z)}{acumulacion o integracion}
+\insertimage{img/pz}{scale=1}{Pares de la Transformada Z}
+\subsection{inversa transformada Z}
+\insertequation{f[n]= \frac{1}{2\pi i}\int^T F(z) z^{n-1}dz=\frac{1}{2\pi i}\int^T Z\{f\}(z) z^{n-1}dz}\\
+y eso es la inversa, una ecuacion y tariamos. \\
+Ahora algo relevante , Teorema de los residuos de Cauchy, les suena eh?, claro LAPLACE, funciona exactamente igual que laplace en continua.\\\\\\
+
+\subsection{Respuesta de frecuencia discreta y filtros.}
+De anterioridad sabemos que laplace se llama funcion de transferencia cuando pasamos del tiempo a laplace un sistema LTI, bueno aqui es exactamente igual, incluso si z= $e^{i2\pi u} se obtiene la respuesta de frecuencia de la DTFT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Pares de laplace}
+\insertimage{img/parespl}{scale=0.9}{Pares de laplace Releveantes}
+\section{Pares de Fourier}
+\insertimage{img/paresfr}{scale=0.8}{Pares de Fourier}
+
+
+
+

@@ -1,0 +1,180 @@
+\section{Formulas a aprenderse}
+\insertimage{img/Formulas}{scale=1}{medio paja escribirlas}
+\section{integrales importantes}
+\insertimage{img/fundamentos/5}{scale=1}{Integral relevante(teorema cos)}
+\insertimage{img/fundamentos/7}{scale=0.2}{Integral relevante}
+\newpage
+\section{Capitulo 1: Electroestatica}
+\subsection{conductores}
+Definicion\\
+Un conductor es un material con cargas moviles que permite el flujo de cargas, logrando una redistribucion de estas cuando el objeto esta cargado\\ 
+De esta manera genera una distribucion interna, tal que vuelve su campo electrico dentro nulo, ya que por superposicion se cancelan las cargas opuestas.\\
+Cabe destacar que a pesar de tener campo interno 0 su voltaje dentro es distinto de 0.
+Para obtener el campo electrico externo se tiene que, este es equivalente al campo de una carga puntual en el centro.\\
+Por ejemplo dentro de una esfera conductora de radio R y carga total q\\
+Siendo r>R , ya que dentro el campo es nulo
+\insertequation{E(4\pi r^2)=\frac{q}{e_0} \to E=\frac{1}{4\pi e_0}*\frac{q}{r^2}}
+\\ Para todo r>= R
+En cambio en el calculo de potencial se tiene que el voltaje interno de la esfera va a ser siempre el mismo de la siguiente manera
+\insertequation{V_R=\int_{\infty}^{r} -E*dl= \frac{1}{4\pi e_0}\int_{r}^{\infty}\frac{q}{r^2}dr} \\ Siempre y cuando r>R, cuando r<= R
+\insertequation{\frac{q}{4\pi e_0 R}}
+\insertimage{img/fundamentos/1}{scale=1}{distribucion de cargas en esfera solida conductora}
+\subsection{Solido conductor con cavidad}
+Cuando en un conductor existe una cavidad interna , en su interior el campo sigue siendo 0, en cambio si en la cavidad existe una carga tal que esta sea q, al rededor de esta el conductor\\
+se distribuye para cancelar esa carga, por ende dentro del conductor la carga permanecera en 0, y su campo externo sera igual a la carga del conductor+ la carga dentro de la cavidad \insertimage{img/fundamentos/2}{scale=1}{Comportamiendo de un conductor con cavidad interna}
+Una condicion especial que sucede es que en presencia de un campo electrico, la carga superficial experimente una fuerza llamada, fuerza por unidad de area f, descrita como
+\insertequation{f=\frac{1}{2}\sigma(E_{above}+E_{below})}
+\insertimage{img/fundamentos/3}{scale=0.8}{Fuerza por unidad de area}
+Un caso estandar es cuando en un conducto el campo interno es 0 y ademas el campo exterior es $\frac{\sigma}{e_0}$n, su E(average)=$\frac{\sigma}{2e_0}$
+Y por ultimo la presion electroestatica es mediante la siguiente expresion.
+\insertequation{P=\frac{e_0}{2}E^2}
+\newpage
+
+
+
+
+\subsection{Capacitores}
+Un capacitor se genera cuando se tienen dos conductores, con carga contraria  y  entre ellos de genera un campo electrico en el cual tiene la capacidad de almacenar cargas.
+Su ecuacion principal se rige mediante
+\insertequation{C=\frac{Q}{V} \to V=Ed}\\
+Esto se mide en Faradios (F).\\ 
+Un ejemplo sencillo de calculo.
+\insertimage{img/fundamentos/4}{scale=1}{Calculo de capacitancia}
+Para poder cargar un capcacitor el trabajo necesario esta cuantificado por:
+\insertequation{W=\frac{1}{2}CV^2}
+Ejemplos utiles
+\insertimage{img/fundamentos/6}{scale=1}{Capacitancia de un cilindro}
+Como es un cilindro se puede ocupar ley de Gauss.
+\insertequation{E\int dA=\frac{Q}{e_0}\to E*(2\pi rL)=\frac{Q}{e_0} \to E=\frac{Q}{2\pi rLe_0}}
+\insertequation{V-V'=\int_a^b E*dr= \int_a^b\frac{Q}{2\pi rLe_0}dr= \frac{Q}{2\pi e_oL}*Ln\frac{b}{a}}
+\insertequation{C=\frac{4\pi e_0}{(\frac{1}{a}-\frac{1}{b})}}
+Condensador esferico.
+\insertimage{img/fundamentos/8}{scale=0.8}{Capacitancia de una esfera}
+Como anntes lo vimos podemos ocupar ley de gauss para el calculo del campo tal que
+\insertequation{E\int dA= \frac{Q}{e_0}\to E(4\pi r^2)= \frac{Q}{e_0}= \frac{Q}{4\pi r^2 e_0}}
+\insertequation{V-V'=\int_{R_1}^{R_2} E*dl=\int_{R_1}^{R_2}  \frac{Q}{4\pi r^2 e_0}dr=\frac{Q}{4\pi e_0}(\frac{1}{R_1}-\frac{1}{R_2})}
+\insertequation{C=\frac{Q}{V}= 4\pi e_0 \frac{R_1R_2}{R_2-R_1}}
+\subsection{Efecto Corona}
+El efecto corona sucede cuando existe un conductor de forma irregular, este efecto permite dividir el conductor en figuras regulares las cuales estan unidas por un cable teorico el cual mantiene el voltaje igual para ambos lados de la figura, esto genera que el objeto mas grande tenga mayor carga pero menor densidad de carg superficial y menor campo electrico.
+\newpage
+\subsection{Metodo de imagenes}
+Para utilizar el metodo de imagenes, primero el problema debe cumplir con los requerimientos de la equacion de poisson.\\
+1. V=0 cuando z=0, y v $\to 0 (x^2+y^2+z^2>>d^2)$.
+Entonces se puede ocupar el metodo de imagenes tal que se agrega otra carga contraria y se pasa al mundo de las cartecianas\\
+(volviendo de estudiar metodo de imagenes). Como antes se menciono para poder utilizar este metodo se necesita que el componente sea conductor, ya que es mas sencillo, y como su metodo lo dice se trata de colocar una carga de imagen. la cual queda entre casos mas simples de resolver, pero siempre necesita un analizis profundo para utilizarse. Dejare unos ejemplos a continuacion para que se pueda entender un poco mas de lo que hablo o intento explicar.\\
+Siempre ocupando la formula de voltaje tal que
+\insertequation{V= \frac{q}{4\pi e_0 r}}\\
+Junto a esto ocuparemos superposicion
+\insertimage{img/fundamentos/im1}{scale=0.7}{Metodo de imagenes plano infinito}
+\insertimage{img/fundamentos/im2}{scale=0.7}{Metodo de imagenes esfera conductora}
+
+
+
+
+
+\section{Dielectricos}
+Comenzando con la pregunta tipica, Que es un dielectrico? bueno cientificamente puede resumirse en un material de baja conductividad electrictica caracterizado por la formacion de dipolos electricos dentro de su interior el cual puede ser polarizado, en sencillas cuentas estas cargas no se reagrupan como en los conductores. Estos generan una polarizacion dielectrica. lo que genera a sencillas cuentas es esto.
+\insertimage{img/fundamentos/9}{scale=0.7}{Material dielectrico en presencia de un campo}
+Como se puede apreciar en la imagen un dielectrico esta compuesto mediante muchos dipolos, la parte interesante es que dentro de un dielectrico el campo se reduce y permite el almacenamiento de cargas. Estos son ocupados para aumentar la capacidad de los capacitores, ya que en si mismo asila de mejor manera las placas o cargas del capacitor, reduciendo el voltaje entre ellos y permitiendo un mayor almacenamiento.\\
+Los materiales dielectricos se diferencias por su constante dielectrica "k" o dicha de otra manera su permitividad, esta se rige de la siguiente formula
+\insertequation{E_{free}=\frac{\omega_{free}}{e_0} \to E_{inducida}=\frac{\omega_{inducida}}{e_0}}\\
+\insertequation{E_{total}=E_{free}+E_{inducida} \to E_{free}\frac{1}{k}=E_{total}}\\
+Entonces gracias a la creacion de esta ecuacion se pueden generar las siguientes concluciones
+\insertequation{e=e_0K}\\
+Si K es mayor, se tiene que el campo disminuye, entonces disminuye el voltaje. Como disminuye el voltaje la capacitancia aumenta, y si aumenta la capacitancia y disminuye el voltaje, el trabajo de la capacitancia tambien disminuye ya que
+\insertequation{W=\frac{1}{2}\frac{Q^2}{C}=\frac{1}{2}QV =\frac{1}{2}V^2C}
+\\
+Un tema interesante a tratar es que en presencia de dielectricos lineales se puede ocupar ley de gauss quedando como
+\insertequation{\oint E dA=\frac{Q_{free}}{Ke_0}}
+\subsection {Polarizacion de dielectricos}
+Cuando se aplica un campo electrico a un dielectrico se generan dos tipos de comportamientos \\
+Dipolos permantetes, el cual queda sujeto a un torque ya que rotan en el sentido del campo,  los dipoles inducidos, los cuales nacen en el sentido del campo\\
+Dentro de un dielectrico existen cientos hasta millones de dipolos, por ende se creo una medida estandar llamada momento dipolar por unidad de volumen o Vector de polarizacion.\\
+Los dipolos permantentes se definen como $p=q d$\\
+En cambio los dipolos inducidos son proporcionales al campo y a una constante unica del material $p=\alpha E$\\
+Cuando al campo es niforme se genera una carga superficial inducida en los extremos del material. \\
+Ejemplo cuando un trozo de cilindro genera un mometo polar, mediante la ecuacion anterior sabemos que $p= P*Vol$, entonces la carga superficial queda definida como$\sigma = \frac{q}{A} =P$\\
+Por otra parte si en el area existe un angulo con respecto a P el area efectiva es P cos$\theta $ entonces la carga superficial queda definida por el angulo del coseno entre la normal y P
+\subsubsectionanum{Polarizacion en un campo no uniforme}
+En sencillas palabras existen dos grandes ecuaciones que resuelven este problema, partiendo con la carga inducida en la superficie.\insertequation{\omega_{in}=P n}\\
+\insertequation{p_{in}= -Rot * P}\\
+Tambien podemos ocupar la ley de gauss en dielectricos tal que
+\insertequation{Rot(e_0E+P)=p_{free}}\\
+\insertequation{D=e_0E+P}\\ y con esta magica ecuaciooon encontramos otra ecuacion de maxwell WUUUUUU!!!
+la cual tiene estas atribuciones 
+\insertequation{Rot*D=p_{free}  \to  \oint_S D*dA=Q_{Free}}\\
+Y en dielectricos se tiene queee
+\insertequation{D= e_0kE}\\
+Demostracion prrona que aparecera en la prueba como bonus 
+\insertequation{ \oint_S D*dA=Q_{Free} \to \oint_S eE*dA=Q_{Free} \to \oint_S E* dA= \frac{Q_{Free}}{e}}\\
+Otra demostracion de la prueba.
+\insertequation{Rot * D = p_{free}\to Rot*eE= p_{free} \to Rot* E = \frac{p_{free}}{e}}
+
+\newpage
+\section{Corriente electrica (IZI)}
+La corriente electrica es la cantidad de cargas en movimiento. definicion sencilla y rapida. Esta es contraria al sentido del voltaje\\
+Si aplicamos una diferencia de potencial en un conductor obtenemos que se genera un campo electrico E=V/d.\\
+En el cual los electrones quedan sujetos a una fuerza especifica.
+\insertequation{F_e=eE \to a=\frac{F_e}{m_e}=\frac{eE}{m_e}}\\ Y tambien tienen obtienen una velocidad prrona tal que
+\insertequation{V_e = a\tau = \frac{eE}{m_e}\tau}\\
+\subsection{Resistencia}
+Super simple una formula y ley de ohm, nada mas que decir
+\insertequation{R=\frac{pd}{A} , , , , , , , V=RI}\\
+Eso fue ley de ohm y resistencia. (Caso especial casacaron esferico).
+\insertequation{dR=\frac{pdL}{A}=\frac{pdr}{4\pi r^2}}\\
+Y cosas varias dificiles de ocupar.
+\insertequation{R=\frac{l}{\sigma A}=\frac{pl}{A}  \to \sigma=\frac{e^2\tau n}{m_e}  \to p=\frac{1}{\sigma}}\\
+$\tau$ disminuye al aumentar la temperatura y la resistencia aumenta con la temperatura\\
+Otra cosa compleja
+\insertgather{V=RI \to R=\frac{pl}{A} \\ I=JA \to J=\sigma E}
+\subsection{Corriente (again)}
+Densidad de corriente vectorial.
+\insertequation{I=\int_S J*dA}\\
+\insertequation{P=VI=\frac{V^2}{R}= I^2R}
+\subsection{Circuitos RC}
+Carga de un condensador
+\insertequation{V(t)=\frac{q(t)}{C}=V(1-e^{-\frac{t}{RC}})}\\
+Para encontrar la corriente es super simple ley de ohm.
+\insertequation{V(t)=\frac{Q(t)}{C}=\frac{Q_0}{C}e^{-\frac{t}{RC}}}
+\newpage
+
+
+
+
+
+\section{Campos magneticos}
+ Partimos rapidamente con los dipolos mageneticos, resumen TODOS los imanes tienen dos polos ya que no existen monopolos (ya que se podria generar energia infinita)\\
+comparando con electrostatico, aqui sucede lo mismo con los elementos neutros. Estos se ven atraidos por los dipolos magneticos\\
+Aclaracion re loca, las brujulas apuntan al sur magentico, es decir el sur es el norte magnetico y el norte el sur magentico, (PuM)\\
+Algo lindo, el campo magnetico que genera la corriente sigue la regla de la mano derecha(torque).
+\subsection{Fuerza Lorentz}
+Una cara que se mueve paralela a la corriente genera una fuerza perpendicular a ella y a su movimiento. Esta fuerza es distinta en presencia de un campo electrico\\
+Sin campo magnetico esta depende de la velocidad, del campo magnetico y de la magnitud de la carga misma tal que
+\insertequation{F=qv x B} \\ B= campo magnetico, esta regla en cargas positivas va bien pero en negativas apunta al sentido contrario.
+\\ Por contraparte si la carga atravieza el campo electrico, la fuerza se llama fuerza de lorentz y es modelada por \insertequation{F=qE +qV x B}
+\\ Re loco pero el campo magnetico se mide e Teslas(T) $\frac{N}{A m}$  o alternativamente en Gauss G=$10^{-4}T$. \\
+dato random , el campo magnetico de la tierra( el cual es extremadamente potente) es de 0.5G
+\subsection{Fuerza y trabajo magnetico}
+Como la gran mayoria de fuerzas esta genera trabajo cuando la carga es desplazada a traves del campo magnetico. \insertequation{W_m=\int_1^2 F*dl=\int_1^2 q(v x B) *dl}
+curiosamente analizando sabemos que el voltaje es paralelo a dl, entonces la fuerza magnetica es  0///// WAAAAAAAAA.\\
+Esto no significa que no tenga efecto sobre la carga, solo dice que no puede alterar su velocidad de carga, pero si cambiar su direccion.
+\\ \\ \\ Fuerza sobre un cable con corriente, en un campo magnetico B. Se modela con una ecuacion (osea sucesion pero nos saltamos eso) \insertequation{F=\int_{linea} I(dl ; B)}
+\insertimage{img/fundamentos/10}{scale=0.9}{mediopaja}
+
+
+
+
+\newpage
+\section{Ejercicios que encuentro relevante saber o no estar pendejo.}
+\subsection{potencial al borde de un disco cargado uniformemente}
+Sinceramente tuve esto en un control y ahora que lo veo es asquerosamente facil. Si alguna vez le mando esto a alguien, porfavor no seas tan weon.\\
+\insertimage{img/fundamentos/ej1}{scale=0.8}{Disco uniforme}
+Como bien sabemos o deberias saber, para calcular el potencial ocupas la siguiente formula
+\insertequation{V=\int \frac{dq}{4\pi e_0r}}\\
+En este ejercicio especificamente tenemos una densidad de carga $\sigma$ , entonces analizando el plano, sabemos que nuestro diferencial va a ser $rdrd\theta$ , a su vez como tenemos que estar en el borde, se puede elegir cualquier punto del borde, personalmente ire al origen ya que simplifica bastante los calculos a realizar.\\
+Entonces si anotamos todo esto en nuestro dibujo tenemos que, la distancia maxima que recorre R es igual a.
+\insertimage{img/fundamentos/ej1.1}{scale=0.8}{Disco uniforme, con puntos claves}
+Porque 2Rcos$\theta$, esto se genera gracias al triangulo rectangulo. y para la integracion sabemos que se recorre de 0 a $\frac{\pi}{2}$ y para el otro lado es tan simple como multiplicar todo por 2. Entonces nuestra integral queda tal que.
+\insertgather{V=\frac{1}{4\pi e_0}\int\frac{\sigma}{r}r dr d\theta \\ V=\frac{2\sigma}{4\pi e_0}\int_0^{\frac{\pi}{2}}\int_0^{2Rcos\theta}drd\theta\\
+V=\frac{2\sigma}{4\pi e_0}\int_0^{\frac{\pi}{2}}2Rcos\theta d\theta \to V=\frac{2\sigma}{4\pi e_0}*2R =\frac{\sigma R}{\pi e_0}}\\
+Simplemente linda magia.
